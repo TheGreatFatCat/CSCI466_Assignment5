@@ -231,7 +231,13 @@ class Router:
     def process_MPLS_frame(self, m_fr, i):
         #TODO: implement MPLS forward, or MPLS decapsulation if this is the last hop router for the path
         print('%s: processing MPLS frame "%s"' % (self, m_fr.label))
-        if (self.name=='RD'):
+
+        try:
+            compare = list(self.decap_tbl_D)[0]
+        except:
+            compare = None
+
+        if (m_fr.label==compare):
             print("Last Hop, Decapsulation")
             try:
                 m_fr.label=self.decap_tbl_D[m_fr.label]#check the label and assign the corresponding destination
