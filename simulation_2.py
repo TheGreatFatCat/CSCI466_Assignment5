@@ -53,7 +53,7 @@ if __name__ == '__main__':
     encap_tbl_D = {'RA':'3', 'H1':'1', 'H2':'2', 'RD':'4'}  # {destination:label}
     frwd_tbl_D = {'4': {0: {'4': 1}}, '2': {1: {'4': 0}}}  # {inlabel: {ininterface: {outlabel, outinterface}}}
     # if receive something from RA (label 3) transmit to H2
-    decap_tbl_D = {'3': 'H2'}
+    decap_tbl_D = {}
     router_c = Router(name='RC',
                       intf_capacity_L=[500, 500],
                       encap_tbl_D=encap_tbl_D,
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     encap_tbl_D = {'RA':'3', 'H1':'1', 'H2':'2', 'RC':'4',}  # {destination:label}
     frwd_tbl_D = {'4': {0: {'4': 2}}, '4': {1: {'2': 2}}, '1':{2:{'1':0}}, '2':{2:{'2':1}}}  # {inlabel: {ininterface: {outlabel, outinterface}}}
     # if receive something from RB/C (label 4) transmit to H3
-    decap_tbl_D = {'4': 'H1', '4':'H2'}
+    decap_tbl_D = {'4': 'H3'}
     router_d = Router(name='RD',
                       intf_capacity_L=[500,500, 500],
                       encap_tbl_D=encap_tbl_D,
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         priority = i%2
         host_1.udt_send('H3', 'MESSAGE_%d_FROM_H1' % i, 1)
         # sleep tp give time for host 1's messege to reach host 3
-        sleep(1)
+        sleep(2)
         host_2.udt_send('H3', 'MESSAGE_%d_FROM_H2' % i, 0)
     #give the network sufficient time to transfer all packets before quitting
     sleep(simulation_time)
