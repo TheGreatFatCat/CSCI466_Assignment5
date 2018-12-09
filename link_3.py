@@ -84,16 +84,15 @@ class Link:
 
                     pkt_S = intf_a.get('out')
                     # go through que and find packet with highest priority value (should be in [0] if start packet
-                    if(intf_a.out_queue.qsize() is not 0):
-                        for pkt in intf_a.out_queue.queue:
-                            # get the biggest value
-                            if (str(pkt[0]).isdigit() and pkt is not None):
-                                if (str(pkt_S[0]).isdigit()):
-                                    # compare the two and get larger
-                                    if (int(pkt[0]) > int(pkt_S[0])):
-                                        pkt_S = pkt
-    # in the above code we check for highest priority from a network type packet entering the router that needs
-    # to be forwarded, we then choose the highest priority
+                   # if(intf_a.out_queue.qsize() is not 0):
+                       # for pkt in intf_a.out_queue.queue:
+                        #    # get the biggest value
+                          #  if (str(pkt[0]).isdigit() and pkt is not None):
+                              #  if (str(pkt_S[0]).isdigit()):
+                                #   # compare the two and get larger
+                                 #   if (int(pkt[0]) > int(pkt_S[0])):
+                                  #      pkt_S = pkt
+    # Redundent code above, 
 
                     intf_b.put(pkt_S, 'in')
                     #update the next free time of the interface according to serialization delay
