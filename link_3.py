@@ -106,25 +106,23 @@ class Link:
 
                 if intf_a.out_queue.qsize() is not 0:
                     print_queue = ''
-                    print_queue += '~~~~~~~~~~BEGIN QUEUE~~~~~~~~~~~~~~~~~\n'
+                    print_queue += '\n~~~~~~~~~~BEGIN QUEUE~~~~~~~~~~~~~~~~~\n\n'
                     # pkt is contained as a string and the size will vary due to the MLPS packet,
                     # to account for this have to grab the
                     for pkt in intf_a.out_queue.queue:
-                        if(pkt[2] == ('1' or '0')):
+                        if(pkt[2] == '1' or pkt[2] == '0'):
                             print_queue += 'Packet with Priority '
                             print_queue += pkt[2]
-                            print_queue += '\n'
-                        elif(pkt[3] == ('1' or '0')):
+                            print_queue += '\n\n'
+                        elif(pkt[3] == '1' or pkt[3] == '0'):
                             print_queue += 'Packet with Priority '
                             print_queue+=pkt[3]
-                            print_queue += '\n'
+                            print_queue += '\n\n'
                         else:
                             print_queue += 'Packet with Priority '
-                            print_queue += pkt[3]
-                            print_queue += '\n'
-                    print_queue += '~~~~~~~~~~END QUEUE~~~~~~~~~~~~~~~~~~~\n'
-
-                    print(pkt)
+                            print_queue += pkt
+                            print_queue += '\n\n'
+                    print_queue += '~~~~~~~~~~END QUEUE~~~~~~~~~~~~~~~~~~~\n\n'
                     print(print_queue)
 
 
