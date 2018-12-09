@@ -79,7 +79,22 @@ class Link:
                 #check if the interface is free to transmit a packet
                 if intf_a.next_avail_time <= time.time():
                     #transmit the packet
+                    # set pkt_s to be the pkt with highest priority
+
+
                     pkt_S = intf_a.get('out')
+                    # go through que and find packet with highest priority value (should be in [0] if start packet
+                    if(intf_a.out_queue.qsize() is not 0):
+                        for pkt in intf_a.out_queue.queue:
+                            # get the biggest value
+                            if (str(pkt[0]).isdigit() and pkt is not None):
+                                if (str(pkt_S[0]).isdigit()):
+                                    # compare the two and get larger
+                                    if (int(pkt[0]) > int(pkt_S[0])):
+                                        pkt_S = pkt
+    # in the above code we check for highest priority from a network type packet entering the router that needs
+    # to be forwarded, we then choose the highest priority
+
                     intf_b.put(pkt_S, 'in')
                     #update the next free time of the interface according to serialization delay
                     pkt_size = len(pkt_S)*8 #assuming each character is 8 bits
@@ -92,6 +107,8 @@ class Link:
                 if intf_a.out_queue.qsize() is not 0:
                     print_queue = ''
                     print_queue += '~~~~~~~~~~BEGIN QUEUE~~~~~~~~~~~~~~~~~\n'
+                    # pkt is contained as a string and the size will vary due to the MLPS packet,
+                    # to account for this have to grab the
                     for pkt in intf_a.out_queue.queue:
                         if(pkt[2] == ('1' or '0')):
                             print_queue += 'Packet with Priority '
@@ -107,6 +124,7 @@ class Link:
                             print_queue += '\n'
                     print_queue += '~~~~~~~~~~END QUEUE~~~~~~~~~~~~~~~~~~~\n'
 
+                    print(pkt)
                     print(print_queue)
 
 

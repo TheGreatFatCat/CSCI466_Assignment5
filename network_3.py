@@ -216,11 +216,11 @@ class Router:
                 label = self.encap_tbl_D['H1']#check for sender and assign the corresponding label
             else:
                 label = self.encap_tbl_D['H2']
-            mpls_s=(str(label)+pkt.priority+pkt.data_S)
+            mpls_s=(str(label)+(pkt.priority+pkt.data_S))
             m_fr=MPLSFrame.from_byte_S(mpls_s)
         else:
             label = self.encap_tbl_D[pkt.dst]#check for destination address and assign the corresponding label
-            mpls_s=(str(label)+pkt.priority+pkt.data_S)
+            mpls_s=(str(label)+(pkt.priority+pkt.data_S))
             m_fr=MPLSFrame.from_byte_S(mpls_s)
 
         print('%s: encapsulated packet "%s" as MPLS frame "%s"' % (self, pkt, m_fr.label))
