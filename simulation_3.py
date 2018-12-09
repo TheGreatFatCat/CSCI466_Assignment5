@@ -100,8 +100,8 @@ if __name__ == '__main__':
     #create some send events    
     for i in range(3):
         priority = i%2
-        host_1.udt_send('H3', 'MESSAGE_%d_FROM_H1', 1)
-        host_2.udt_send('H3', 'MESSAGE_%d_FROM_H2', 0)
+        host_1.udt_send('H3', 'MESSAGE_%d_FROM_H1' % i, 1)
+        host_2.udt_send('H3', 'MESSAGE_%d_FROM_H2' % i, 0)
     #give the network sufficient time to transfer all packets before quitting
     sleep(simulation_time)
 
